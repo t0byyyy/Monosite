@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+func _on_control_start_game() -> void:
+	show()
+	
 var max_speed = 600
 var accel = 9999
 var friction = 9999
