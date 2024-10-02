@@ -1,0 +1,1 @@
+use set_process_input(false) to turn off input for player
