@@ -19,3 +19,5 @@ shape = SubResource("RectangleShape2D_sygx6")
 position = Vector2(7, 0)
 scale = Vector2(2.74219, 2.63672)
 texture = ExtResource("2_15go2")
+
+[node name="Camera2D" type="Camera2D" parent="."]
