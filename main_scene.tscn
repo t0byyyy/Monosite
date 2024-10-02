@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cgd1qf5k3aj7u"]
+[gd_scene load_steps=4 format=3 uid="uid://cgd1qf5k3aj7u"]
 
 [ext_resource type="PackedScene" uid="uid://cfjs5aun48o6y" path="res://main_menu.tscn" id="1_jbfpw"]
 [ext_resource type="PackedScene" uid="uid://4er2c8roiypp" path="res://player.tscn" id="2_2ephw"]
+[ext_resource type="Texture2D" uid="uid://c218fujjciy2l" path="res://icon.svg" id="3_iy247"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -10,4 +11,8 @@
 [node name="player" parent="." instance=ExtResource("2_2ephw")]
 visible = false
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_iy247")
+
+[connection signal="start_game" from="Control" to="Control" method="_on_start_game"]
 [connection signal="start_game" from="Control" to="player" method="_on_control_start_game"]

@@ -1,12 +1,8 @@
 extends CharacterBody2D
-
-func _on_control_start_game() -> void:
-	show()
 	
 var max_speed = 600
 var accel = 9999
 var friction = 9999
-
 var input = Vector2.ZERO
 
 func _physics_process(delta):
@@ -30,3 +26,5 @@ func player_movement(delta):
 		velocity = velocity.limit_length(max_speed)
 	
 	move_and_slide()
+func _on_control_start_game() -> void:
+	show()
