@@ -14,5 +14,4 @@ visible = false
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("3_iy247")
 
-[connection signal="start_game" from="Control" to="Control" method="_on_start_game"]
 [connection signal="start_game" from="Control" to="player" method="_on_control_start_game"]
