@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cfjs5aun48o6y"]
+[gd_scene load_steps=3 format=3 uid="uid://cfjs5aun48o6y"]
 
 [ext_resource type="Script" path="res://main_menu.gd" id="1_6q76u"]
+[ext_resource type="Texture2D" uid="uid://chkckbe1o33m6" path="res://assets/title_sprite.png" id="2_dfqtf"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -9,13 +10,10 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_6q76u")
 
-[node name="Label" type="Label" parent="."]
-layout_mode = 0
-offset_left = 531.0
-offset_top = 152.0
-offset_right = 604.0
-offset_bottom = 175.0
-text = "Monosite"
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(566, 165)
+scale = Vector2(8, 8)
+texture = ExtResource("2_dfqtf")
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
