@@ -8,7 +8,7 @@ var friction = 9999
 var input = Vector2.ZERO
 
 var hp = 100
-signal health_value
+signal health_value(hp)
 signal dead
 
 func _on_control_start_game() -> void:
