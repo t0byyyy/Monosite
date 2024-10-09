@@ -1,1 +1,5 @@
-use set_process_input(false) to turn off input for player
+figure out how to code health values
+	figure out how to code hp bar
+	figure out how to code enemy/damage
+
+figure out how to flip player sprite
