@@ -11,24 +11,24 @@ offset_bottom = 40.0
 script = ExtResource("1_6q76u")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(566, 165)
+position = Vector2(0, -200)
 scale = Vector2(8, 8)
 texture = ExtResource("2_dfqtf")
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
-offset_left = 545.0
-offset_top = 283.0
-offset_right = 586.0
-offset_bottom = 314.0
+offset_left = -21.0
+offset_top = -17.0
+offset_right = 20.0
+offset_bottom = 14.0
 text = "Play"
 
 [node name="Button2" type="Button" parent="."]
 layout_mode = 0
-offset_left = 545.0
-offset_top = 357.0
-offset_right = 587.0
-offset_bottom = 388.0
+offset_left = -21.0
+offset_top = 80.0
+offset_right = 21.0
+offset_bottom = 111.0
 text = "Quit"
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
