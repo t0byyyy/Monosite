@@ -2,10 +2,8 @@ extends CharacterBody2D
 
 var can_move
 
-var max_speed = 600
-var accel = 9999
-var friction = 9999
-var input = Vector2.ZERO
+var JUMP_VELOCITY = -800
+var SPEED = 400
 
 var hp = 100
 signal health_value(hp)
@@ -15,27 +13,25 @@ func _on_control_start_game() -> void:
 	show()
 	can_move = true
 
-func _physics_process(delta):
-	player_movement(delta)
-
-func get_input():
-	input.x = int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left"))
-	input.y = int(Input.is_action_pressed("ui_down")) - int(Input.is_action_pressed("ui_up"))
-	return input.normalized()
-
-func player_movement(delta):
-	input = get_input()
+func _physics_process(delta: float) -> void:
 	if can_move == true:
-		if input == Vector2.ZERO:
-			if velocity.length() > (friction * delta):
-				velocity -= velocity.normalized() * (friction * delta)
-			else:
-				velocity = Vector2.ZERO
+		if not is_on_floor():
+			velocity += get_gravity() * delta
+
+		# Handle jump.
+		if Input.is_action_pressed("ui_accept") and is_on_floor():
+			velocity.y = JUMP_VELOCITY
+
+		# Get the input direction and handle the movement/deceleration.
+		# As good practice, you should replace UI actions with custom gameplay actions.
+		var direction := Input.get_axis("ui_left", "ui_right")
+
+		if direction:
+			velocity.x = direction * SPEED
 		else:
-			velocity += (input * accel * delta)
-			velocity = velocity.limit_length(max_speed)
-	
-	move_and_slide()
+				velocity.x = move_toward(velocity.x, 0, SPEED)
+
+		move_and_slide()
 
 func hp_control():
 	if hp <= 0:
@@ -43,6 +39,3 @@ func hp_control():
 		dead.emit()
 	else:
 		health_value.emit()
-	
-	
-	
