@@ -1,17 +1,14 @@
 extends CharacterBody2D
 
 var can_move
-var min_jump_vel = -175
-var max_jump_vel = -400
-var jump_vel = -175
 var SPEED = 100
 
-const gravity = 2000
+const gravity = 800
 
 # jump logic
 var jumps_available = 2
-const total_jump_power = 1500
-const jump_decelleration = 3000
+const total_jump_power = 1000
+const jump_deceleration = 1200
 var jump_power = total_jump_power
 
 
@@ -35,8 +32,8 @@ func _physics_process(delta: float) -> void:
 			
 		if Input.is_action_pressed("ui_accept"):
 
-			velocity.y += -jump_power * delta
-			jump_power = jump_power - (jump_decelleration * delta)
+			velocity.y += -(jump_power*delta)
+			jump_power = jump_power - (jump_deceleration * delta)
 					
 		if Input.is_action_just_released("ui_accept"):
 			jumps_available -= 1
