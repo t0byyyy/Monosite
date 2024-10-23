@@ -7,6 +7,7 @@
 [node name="Node2D" type="Node2D"]
 
 [node name="Control" parent="." instance=ExtResource("1_cw0vv")]
+scale = Vector2(0.3, 0.3)
 
 [node name="player" parent="." instance=ExtResource("2_d4ue6")]
 visible = false
