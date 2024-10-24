@@ -3,14 +3,13 @@ extends CharacterBody2D
 var can_move
 var SPEED = 100
 
-const gravity = 800
+const gravity = 200
 
 # jump logic
 var jumps_available = 2
 const total_jump_power = 1000
 const jump_deceleration = 1200
 var jump_power = total_jump_power
-
 
 var hp = 100
 signal health_value(hp)
@@ -29,7 +28,7 @@ func _physics_process(delta: float) -> void:
 		if jumps_available != 2 and is_on_floor():
 			jumps_available = 2
 			jump_power = total_jump_power
-			
+
 		if Input.is_action_pressed("ui_accept"):
 
 			velocity.y += -(jump_power*delta)
