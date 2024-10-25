@@ -1,23 +1,24 @@
 extends CharacterBody2D
 
 var can_move
-var SPEED = 100
-
-const gravity = 200
-
-# jump logic
-var jumps_available = 2
-const total_jump_power = 1000
-const jump_deceleration = 1200
-var jump_power = total_jump_power
-
-var hp = 100
-signal health_value(hp)
-signal dead
-
 func _on_control_start_game() -> void:
 	show()
 	can_move = true
+
+var dead = false
+signal death
+
+func hp_control():
+	if dead == true:
+		death.emit()
+
+# jump logic
+var jumps_available = 1
+const total_jump_power = 700
+const jump_deceleration = 1200
+var jump_power = total_jump_power
+const gravity = 200
+var x_accel = 100
 
 func _physics_process(delta: float) -> void:
 	if can_move == true:
@@ -25,30 +26,31 @@ func _physics_process(delta: float) -> void:
 			velocity.y += gravity * delta
 
 		# Handle jump.
-		if jumps_available != 2 and is_on_floor():
-			jumps_available = 2
+		if jumps_available != 1 and is_on_floor():
+			jumps_available = 1
 			jump_power = total_jump_power
 
-		if Input.is_action_pressed("ui_accept"):
-
-			velocity.y += -(jump_power*delta)
-			jump_power = jump_power - (jump_deceleration * delta)
-					
-		if Input.is_action_just_released("ui_accept"):
-			jumps_available -= 1
+		if jumps_available > 0 and Input.is_action_just_pressed("ui_accept"):
+			if velocity.x != 0:
+				velocity.y += -(jump_power*delta) - 100 - abs(velocity.x / 7)
+				jump_power = jump_power - (jump_deceleration * delta)
+				jumps_available = 0
+			else:
+				velocity.y += -(jump_power*delta) - 100
+				jump_power = jump_power - (jump_deceleration * delta)
+				jumps_available = 0
 
 		var direction := Input.get_axis("ui_left", "ui_right")
 
-		if direction:
-			velocity.x = direction * SPEED
+		if direction and Input.is_action_pressed("run"):
+			x_accel += 10
+			if x_accel >= 250:
+				x_accel = 250
 		else:
-				velocity.x = move_toward(velocity.x, 0, SPEED)
+			x_accel = 100
+		if direction:
+			velocity.x = direction * x_accel
+		else:
+			velocity.x = move_toward(velocity.x, 0, x_accel)
 
 		move_and_slide()
-
-func hp_control():
-	if hp <= 0:
-		hp = 0
-		dead.emit()
-	else:
-		health_value.emit()
