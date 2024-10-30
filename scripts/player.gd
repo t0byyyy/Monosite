@@ -14,7 +14,7 @@ func hp_control():
 
 # jump logic
 var jumps_available = 1
-const total_jump_power = 700
+const total_jump_power = 750
 const jump_deceleration = 1200
 var jump_power = total_jump_power
 const gravity = 200
