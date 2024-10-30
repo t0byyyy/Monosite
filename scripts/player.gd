@@ -30,7 +30,7 @@ func _physics_process(delta: float) -> void:
 			jumps_available = 1
 			jump_power = total_jump_power
 
-		if jumps_available > 0 and Input.is_action_just_pressed("ui_accept"):
+		if jumps_available > 0 and Input.is_action_pressed("ui_accept"):
 			if velocity.x != 0:
 				velocity.y += -(jump_power*delta) - 100 - abs(velocity.x / 7)
 				jump_power = jump_power - (jump_deceleration * delta)
@@ -43,9 +43,9 @@ func _physics_process(delta: float) -> void:
 		var direction := Input.get_axis("ui_left", "ui_right")
 
 		if direction and Input.is_action_pressed("run"):
-			x_accel += 10
-			if x_accel >= 250:
-				x_accel = 250
+			x_accel += 600
+			if x_accel >= 600:
+				x_accel = 600
 		else:
 			x_accel = 100
 		if direction:
