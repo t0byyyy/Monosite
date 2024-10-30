@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfjs5aun48o6y"]
+
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_6q76u"]
+[ext_resource type="Texture2D" uid="uid://chkckbe1o33m6" path="res://assets/title_sprite.png" id="2_dfqtf"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_6q76u")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -200)
+scale = Vector2(8, 8)
+texture = ExtResource("2_dfqtf")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = -21.0
+offset_top = -17.0
+offset_right = 20.0
+offset_bottom = 14.0
+text = "Play"
+
+[node name="Button2" type="Button" parent="."]
+layout_mode = 0
+offset_left = -21.0
+offset_top = 80.0
+offset_right = 21.0
+offset_bottom = 111.0
+text = "Quit"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]

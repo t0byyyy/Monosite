@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://wwbc6fgx56v1"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ygv3c"]
+size = Vector2(100, 10)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_8swox"]
+size = Vector2(100, 10)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_y6p88"]
+size = Vector2(100, 10)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+offset_right = 100.0
+offset_bottom = 10.0
+texture_under = SubResource("PlaceholderTexture2D_ygv3c")
+texture_over = SubResource("PlaceholderTexture2D_8swox")
+texture_progress = SubResource("PlaceholderTexture2D_y6p88")
+texture_progress_offset = Vector2(1, 1)
