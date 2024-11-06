@@ -48,3 +48,7 @@ func _physics_process(delta: float) -> void:
 			velocity.x = move_toward(velocity.x, 0, x_accel)
 
 		move_and_slide()
+
+	player_xpos.emit(position.x)
+
+signal player_xpos(x)

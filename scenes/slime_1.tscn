@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://c40j7s2wily3y"]
+
+[ext_resource type="Script" path="res://scripts/slime_1.gd" id="1_73fsk"]
+[ext_resource type="Texture2D" uid="uid://d0gwtsr06bb4k" path="res://assets/slime.png" id="2_wqcyu"]
+
+[node name="slime_1" type="CharacterBody2D"]
+script = ExtResource("1_73fsk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_wqcyu")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-11, -4, -6, -8, 6, -8, 11, -4, 11, 5, 8, 8, -8, 8, -11, 5)
