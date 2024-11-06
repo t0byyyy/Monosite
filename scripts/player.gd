@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+# receives game start
 var can_move
 func _on_control_start_game() -> void:
 	show()
@@ -21,6 +22,8 @@ const gravity = 200
 var x_accel = 100
 
 func _physics_process(delta: float) -> void:
+
+# movement and shit
 	if can_move == true:
 		if not is_on_floor():
 			velocity.y += gravity * delta
@@ -49,6 +52,7 @@ func _physics_process(delta: float) -> void:
 
 		move_and_slide()
 
+# for enemy tracking
 	player_xpos.emit(position.x)
 
 signal player_xpos(x)
