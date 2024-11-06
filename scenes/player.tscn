@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://4er2c8roiypp"]
+[gd_scene load_steps=6 format=3 uid="uid://4er2c8roiypp"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_8f688"]
 [ext_resource type="Texture2D" uid="uid://deoh8j8a80f87" path="res://assets/the creep.png" id="2_81qn6"]
+[ext_resource type="Script" path="res://scenes/camera_2d.gd" id="3_3vmq6"]
 [ext_resource type="Texture2D" uid="uid://boskhqgb7g6v0" path="res://assets/gradient.png" id="3_5n2ca"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sygx6"]
@@ -24,6 +25,7 @@ texture = ExtResource("2_81qn6")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)
+script = ExtResource("3_3vmq6")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 shadow_enabled = true
