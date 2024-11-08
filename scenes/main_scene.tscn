@@ -18,6 +18,7 @@ z_index = -1
 
 [node name="slime_1" parent="." instance=ExtResource("4_pikgb")]
 visible = false
+z_index = -1
 position = Vector2(-74, -6)
 
 [connection signal="start_game" from="Control" to="player" method="_on_control_start_game"]

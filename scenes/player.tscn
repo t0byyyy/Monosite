@@ -25,4 +25,5 @@ zoom = Vector2(4, 4)
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 shadow_enabled = true
+shadow_filter = 1
 texture = ExtResource("3_5n2ca")
