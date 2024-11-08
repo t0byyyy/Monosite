@@ -6,43 +6,27 @@ func _on_control_start_game() -> void:
 	show()
 	can_move = true
 
-var dead = false
-signal death
-
-func hp_control():
-	if dead == true:
-		death.emit()
-
-# jump logic
-var jumps_available = 1
-const total_jump_power = 750
-const jump_deceleration = 1200
-var jump_power = total_jump_power
+# jump logic - needs variable jump
 const gravity = 200
+const base_jump_power = 750
+var jump_power = base_jump_power
 var x_accel = 100
 
 func _physics_process(delta: float) -> void:
 
-# movement and shit
+# gravity
 	if can_move == true:
 		if not is_on_floor():
 			velocity.y += gravity * delta
 
-		# Handle jump.
-		if jumps_available != 1 and is_on_floor():
-			jumps_available = 1
-			jump_power = total_jump_power
+# handles jump, resets to base on floor
+		if is_on_floor():
+			jump_power = base_jump_power
 
-		if jumps_available > 0 and Input.is_action_pressed("ui_accept"):
-			if velocity.x != 0:
-				velocity.y += -(jump_power*delta) - 100 - abs(velocity.x / 7)
-				jump_power = jump_power - (jump_deceleration * delta)
-				jumps_available = 0
-			else:
-				velocity.y += -(jump_power*delta) - 100
-				jump_power = jump_power - (jump_deceleration * delta)
-				jumps_available = 0
+		if is_on_floor() and Input.is_action_pressed("ui_accept"):
+			velocity.y += -(jump_power*delta) - 100
 
+# handles directional inputs
 		var direction := Input.get_axis("ui_left", "ui_right")
 
 		if direction:
@@ -52,7 +36,7 @@ func _physics_process(delta: float) -> void:
 
 		move_and_slide()
 
-# for enemy tracking
+# emits xpos for enemy tracking
 	player_xpos.emit(position.x)
 
 signal player_xpos(x)
