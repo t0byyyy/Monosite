@@ -7,10 +7,10 @@ func _on_control_start_game() -> void:
 	can_move = true
 
 # jump logic - needs variable jump
-const gravity = 200
-const base_jump_power = 750
-var jump_power = base_jump_power
+const gravity = 300
+var jump_power = 600
 var x_accel = 100
+var can_jump
 
 func _physics_process(delta: float) -> void:
 
@@ -21,11 +21,14 @@ func _physics_process(delta: float) -> void:
 
 # handles jump, resets to base on floor
 		if is_on_floor():
-			jump_power = base_jump_power
-
-		if is_on_floor() and Input.is_action_pressed("ui_accept"):
-			velocity.y += -(jump_power*delta) - 100
-
+			can_jump = true
+		if velocity.y <= -125 or is_on_ceiling():
+			can_jump = false
+		if Input.is_action_pressed("ui_accept") and can_jump == true:
+			velocity.y += -(jump_power*delta)
+			print(velocity.y)
+		if Input.is_action_just_pressed("ui_accept") and can_jump == true:
+			velocity.y += -85
 # handles directional inputs
 		var direction := Input.get_axis("ui_left", "ui_right")
 

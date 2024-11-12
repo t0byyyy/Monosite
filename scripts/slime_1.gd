@@ -19,8 +19,8 @@ func _physics_process(delta: float) -> void:
 				direction = 1
 			if player_xpos < position.x:
 				direction = -1
-			move_and_slide()
 			velocity.x = x_speed*direction
+			move_and_slide()
 
 # receives jump countdown
 func _on_jump_timer_jump() -> void:
