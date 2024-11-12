@@ -13,7 +13,7 @@ var x_accel = 100
 var can_jump
 
 func _physics_process(delta: float) -> void:
-
+	print(velocity.y)
 # gravity
 	if can_move == true:
 		if not is_on_floor():
@@ -22,11 +22,10 @@ func _physics_process(delta: float) -> void:
 # handles jump, resets to base on floor
 		if is_on_floor():
 			can_jump = true
-		if velocity.y <= -125 or is_on_ceiling():
+		if velocity.y <= -125 or is_on_ceiling() or Input.is_action_just_released("ui_accept") or velocity.y >= 35:
 			can_jump = false
 		if Input.is_action_pressed("ui_accept") and can_jump == true:
 			velocity.y += -(jump_power*delta)
-			print(velocity.y)
 		if Input.is_action_just_pressed("ui_accept") and can_jump == true:
 			velocity.y += -85
 # handles directional inputs
