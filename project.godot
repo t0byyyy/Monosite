@@ -67,7 +67,8 @@ zoomout={
 
 [layer_names]
 
-2d_physics/layer_2="deathbox"
+2d_physics/layer_1="player"
+2d_physics/layer_2="enemy"
 
 [rendering]
 
