@@ -20,7 +20,7 @@ func _physics_process(delta: float) -> void:
 			velocity.y += gravity * delta
 
 # handles jump, resets to base on floor
-		if is_on_floor():
+		if is_on_floor() and not Input.is_action_pressed("ui_accept"):
 			can_jump = true
 		if velocity.y <= -125 or is_on_ceiling() or Input.is_action_just_released("ui_accept") or velocity.y >= 15:
 			can_jump = false
