@@ -24,6 +24,10 @@ texture = SubResource("PlaceholderTexture2D_vhpyg")
 zoom = Vector2(4, 4)
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(-6.06477e-06, 2.38419e-06)
+scale = Vector2(1.5625, 0.878906)
+energy = 0.27
 shadow_enabled = true
-shadow_filter = 1
+shadow_filter = 2
 texture = ExtResource("3_5n2ca")
+texture_scale = 0.18

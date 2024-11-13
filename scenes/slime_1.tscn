@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/slime_1.gd" id="1_73fsk"]
 [ext_resource type="Texture2D" uid="uid://d0gwtsr06bb4k" path="res://assets/slime.png" id="2_wqcyu"]
 [ext_resource type="Script" path="res://scripts/jump_timer.gd" id="3_kb16v"]
-[ext_resource type="Script" path="res://scenes/area_2d.gd" id="4_c83il"]
+[ext_resource type="Script" path="res://scripts/area_2d.gd" id="4_c83il"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_dof8g"]
 polygon = PackedVector2Array(19, 12, 19, 14, 17, 14, 17, 16, -17, 16, -17, 14, -19, 14, -19, 12, -21, 12, -21, 10, -23, 10, -23, -8, -21, -8, -21, -10, -19, -10, -19, -12, -15, -12, -15, -14, -13, -14, -13, -16, 13, -16, 13, -14, 15, -14, 15, -12, 19, -12, 19, -10, 21, -10, 21, -8, 23, -8, 23, 10, 21, 10, 21, 12)
@@ -38,3 +38,5 @@ polygon = PackedVector2Array(19, 12, 19, 14, 17, 14, 17, 16, -17, 16, -17, 14, -
 
 [connection signal="jump" from="JumpTimer" to="." method="_on_jump_timer_jump"]
 [connection signal="timeout" from="JumpTimer" to="JumpTimer" method="_on_timeout"]
+[connection signal="area_entered" from="Area2D" to="Area2D" method="_on_area_entered"]
+[connection signal="area_exited" from="Area2D" to="Area2D" method="_on_area_exited"]

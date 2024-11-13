@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ks172d4dfax1"
-path="res://.godot/imported/placeholder_tiles.png-97cea9c12c3cc7b088a2948ff547195d.ctex"
+uid="uid://bhuxi8xsujgv7"
+path="res://.godot/imported/gricks the sequel.png-d8ec0b2aa16f9d80a1dcbc69ffa6baeb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/placeholder_tiles.png"
-dest_files=["res://.godot/imported/placeholder_tiles.png-97cea9c12c3cc7b088a2948ff547195d.ctex"]
+source_file="res://assets/gricks the sequel.png"
+dest_files=["res://.godot/imported/gricks the sequel.png-d8ec0b2aa16f9d80a1dcbc69ffa6baeb.ctex"]
 
 [params]
 

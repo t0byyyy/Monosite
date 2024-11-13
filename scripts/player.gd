@@ -30,7 +30,7 @@ func _physics_process(delta: float) -> void:
 			velocity.y += -85
 # handles directional inputs
 		var direction := Input.get_axis("ui_left", "ui_right")
-
+		
 		if direction:
 			velocity.x = direction * x_accel
 		else:
@@ -42,3 +42,11 @@ func _physics_process(delta: float) -> void:
 	player_xpos.emit(position.x)
 
 signal player_xpos(x)
+
+func _ready():
+	var parent = get_parent()
+	var slime = parent.get_node_or_null("slime_1/Area2D")
+	slime.touching_slime.connect(death)
+
+func death():
+	can_move = false
