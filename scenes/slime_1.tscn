@@ -10,7 +10,7 @@ polygon = PackedVector2Array(19, 12, 19, 14, 17, 14, 17, 16, -17, 16, -17, 14, -
 
 [node name="slime_1" type="CharacterBody2D"]
 scale = Vector2(0.5, 0.5)
-collision_layer = 2
+collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_73fsk")
 
@@ -31,6 +31,8 @@ autostart = true
 script = ExtResource("3_kb16v")
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("4_c83il")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
