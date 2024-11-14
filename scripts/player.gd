@@ -27,7 +27,7 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_pressed("ui_accept") and can_jump == true:
 			velocity.y += -(jump_power*delta)
 		if Input.is_action_just_pressed("ui_accept") and can_jump == true:
-			velocity.y += -85
+			velocity.y += -95
 
 # handles directional inputs
 		var direction := Input.get_axis("ui_left", "ui_right")
