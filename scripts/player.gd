@@ -32,7 +32,7 @@ func _physics_process(delta: float) -> void:
 
 # dash
 		var direction := Input.get_axis("ui_left", "ui_right")
-		print(velocity.x, " ", velocity.y, " ", can_dash)
+		#print(velocity.x, " ", velocity.y, " ", can_dash)
 # handles directional inputs, dash
 		if direction:
 			if !Input.is_action_pressed("run") or can_dash == false:
@@ -59,9 +59,10 @@ func _physics_process(delta: float) -> void:
 
 signal player_xpos(x)
 
+var origin = Vector2(0, 0)
 #handles death, remember to add Area2Ds with 2,2 collisions to interact with this
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	death()
+	self.position = origin
 
 func death():
 	can_move = false

@@ -1,9 +1,3 @@
-figure out how to code health values
-	figure out how to code hp bar
-	figure out how to code enemy/damage
-
-figure out how to flip player sprite
-
-jump issues
-	when jumping, gain negative gravity as long as space is held
-	gravity increasing when falling
+3 tile high jump
+5 block long jump
+4 block long dash

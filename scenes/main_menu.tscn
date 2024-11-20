@@ -31,5 +31,13 @@ offset_right = 21.0
 offset_bottom = 111.0
 text = "Quit"
 
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = -59.0
+offset_top = 133.0
+offset_right = 103.0
+offset_bottom = 266.0
+text = "Bog Studios llc. Copywrite 2024"
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
