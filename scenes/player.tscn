@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://4er2c8roiypp"]
+[gd_scene load_steps=6 format=3 uid="uid://4er2c8roiypp"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_8f688"]
 [ext_resource type="Texture2D" uid="uid://boskhqgb7g6v0" path="res://assets/gradient.png" id="3_5n2ca"]
@@ -6,32 +6,32 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sygx6"]
 size = Vector2(7, 7)
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_vhpyg"]
-size = Vector2(7, 7)
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_3r4ui"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_4fggd"]
+specular_texture = SubResource("PlaceholderTexture2D_3r4ui")
 
 [node name="player" type="CharacterBody2D"]
 scale = Vector2(2, 2)
 script = ExtResource("1_8f688")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 0.4
+shadow_enabled = true
+texture = ExtResource("3_5n2ca")
+texture_scale = 0.07
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_sygx6")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 light_mask = 2
-texture = SubResource("PlaceholderTexture2D_vhpyg")
+scale = Vector2(7, 7)
+texture = SubResource("CanvasTexture_4fggd")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)
 editor_draw_limits = true
-
-[node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(-6.06477e-06, 2.38419e-06)
-scale = Vector2(1.5625, 0.878906)
-energy = 0.27
-shadow_enabled = true
-shadow_filter = 2
-texture = ExtResource("3_5n2ca")
-texture_scale = 0.18
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2
