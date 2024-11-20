@@ -47,6 +47,8 @@ func _physics_process(delta: float) -> void:
 		if abs(velocity.x) >= 1000 or Input.is_action_just_released("run"):
 			can_dash = false
 			can_jump = false
+		if is_on_wall_only():
+			can_dash = false
 		if is_on_floor() and !Input.is_action_pressed("run"):
 			can_dash = true
 
