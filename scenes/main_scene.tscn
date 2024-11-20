@@ -17,6 +17,7 @@ visible = false
 
 [node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="player"]
 stream = ExtResource("3_sayrx")
+parameters/looping = true
 script = ExtResource("4_4u1o7")
 
 [node name="level_debug" parent="." instance=ExtResource("4_u1v3v")]
