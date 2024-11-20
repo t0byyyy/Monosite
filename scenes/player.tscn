@@ -31,6 +31,8 @@ texture = SubResource("CanvasTexture_4fggd")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)
+position_smoothing_enabled = true
+position_smoothing_speed = 20.0
 editor_draw_limits = true
 
 [node name="Area2D" type="Area2D" parent="."]

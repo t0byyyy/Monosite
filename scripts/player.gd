@@ -29,14 +29,19 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_pressed("ui_accept") and can_jump == true:
 			velocity.y += -95
 
-# handles directional inputs
+# dash
 		var direction := Input.get_axis("ui_left", "ui_right")
-		
-		if direction:
+		if Input.is_action_just_pressed("run") and direction:
+			velocity.x = 200 * direction
+
+# handles directional inputs
+		if direction and !Input.is_action_pressed("run"):
 			velocity.x = direction * x_accel
+		elif Input.is_action_pressed("run") and direction and abs(velocity.x) <= 700:
+			velocity.x += 300 * direction
 		else:
 			velocity.x = move_toward(velocity.x, 0, x_accel)
-
+		print(velocity.x)
 		move_and_slide()
 
 # emits xpos for enemy tracking
