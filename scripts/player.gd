@@ -75,7 +75,6 @@ signal player_xpos(x)
 signal start_dash_cd()
 func _on_dash_cd_timeout() -> void:
 	dash_on_cd = false
-	print("dash off cooldown")
 
 #handles death, remember to add Area2Ds with 2,2 collisions to interact with this
 var spawn = Vector2(0, 0)
