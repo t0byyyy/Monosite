@@ -53,6 +53,8 @@ func _physics_process(delta: float) -> void:
 		if dashing == true:
 			velocity.y = 0
 			velocity.x += 150 * last_direction
+		if dashing == true and is_on_wall():
+			can_dash = false
 		if is_on_wall() or abs(velocity.x) >= 750:
 			dashing = false
 		if abs(velocity.x) >= 750:
