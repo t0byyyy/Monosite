@@ -17,6 +17,7 @@ var dashing = false
 var last_direction
 var direction
 var can_dash
+var dash_on_cd = false
 
 func _physics_process(delta: float) -> void:
 
@@ -24,17 +25,16 @@ func _physics_process(delta: float) -> void:
 	direction = Input.get_axis("ui_left", "ui_right")
 	if not direction == 0 and dashing == false:
 		last_direction = direction
-	print(velocity.x, " ", velocity.y, " ", last_direction, " ", can_dash, " ", dashing)
+	#print(velocity.x, " ", velocity.y, " ", last_direction, " ", can_dash, " ", dashing)
 
 # gravity
 	if can_move == true:
 		if not is_on_floor() and velocity.y <= 600:
 			velocity.y += gravity * delta
 
-# handles jump, checks for dash
-		if is_on_floor() and !Input.is_action_pressed("ui_accept"):
+# handles jump
+		if is_on_floor() and !Input.is_action_pressed("ui_accept") and !dashing == true:
 			can_jump = true
-			can_dash = true
 		if velocity.y <= -135 or is_on_ceiling() or Input.is_action_just_released("ui_accept") or velocity.y >= 15 or dashing == true:
 			can_jump = false
 		if Input.is_action_pressed("ui_accept") and can_jump == true:
@@ -47,9 +47,13 @@ func _physics_process(delta: float) -> void:
 			velocity.x = move_toward(velocity.x, 0, x_accel)
 
 #handles dash
-		if Input.is_action_just_pressed("run") and can_dash == true:
+		if is_on_floor() and !Input.is_action_pressed("run") and !dashing == true:
+			can_dash = true
+		if Input.is_action_just_pressed("run") and can_dash == true and dash_on_cd == false:
 			dashing = true
 			velocity.x = 300 * last_direction
+			start_dash_cd.emit()
+			dash_on_cd = true
 		if dashing == true:
 			velocity.y = 0
 			velocity.x += 150 * last_direction
@@ -67,10 +71,16 @@ func _physics_process(delta: float) -> void:
 	player_xpos.emit(position.x)
 signal player_xpos(x)
 
+#signals for dash cooldown
+signal start_dash_cd()
+func _on_dash_cd_timeout() -> void:
+	dash_on_cd = false
+	print("dash off cooldown")
+
 #handles death, remember to add Area2Ds with 2,2 collisions to interact with this
-var origin = Vector2(0, 0)
+var spawn = Vector2(0, 0)
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	self.position = origin
+	self.position = spawn
 
 func death():
 	can_move = false
