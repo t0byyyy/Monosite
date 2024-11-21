@@ -11,10 +11,10 @@ const gravity = 400
 var jump_power = 600
 var x_accel = 100
 var can_jump
-var can_dash = true
+var dashing
 
 func _physics_process(delta: float) -> void:
-
+	print(velocity.x, " ", velocity.y)
 # gravity
 	if can_move == true:
 		if not is_on_floor() and velocity.y <= 600:
@@ -26,31 +26,16 @@ func _physics_process(delta: float) -> void:
 		if velocity.y <= -135 or is_on_ceiling() or Input.is_action_just_released("ui_accept") or velocity.y >= 15:
 			can_jump = false
 		if Input.is_action_pressed("ui_accept") and can_jump == true:
-			velocity.y += -(jump_power * delta + abs(velocity.x) * delta)
+			velocity.y += -(jump_power * delta)
 		if Input.is_action_just_pressed("ui_accept") and can_jump == true:
 			velocity.y += -95
 
-# dash
+# handles directional inputs
 		var direction := Input.get_axis("ui_left", "ui_right")
-		#print(velocity.x, " ", velocity.y, " ", can_dash)
-# handles directional inputs, dash
 		if direction:
-			if !Input.is_action_pressed("run") or can_dash == false:
-				velocity.x = direction * x_accel
-			if Input.is_action_pressed("run") and can_dash == true:
-				velocity.x += 150 * direction
-				velocity.y = 0
-			if Input.is_action_just_pressed("run") and can_dash == true:
-				velocity.x = 250 * direction
+			velocity.x = direction * x_accel
 		else:
 			velocity.x = move_toward(velocity.x, 0, x_accel)
-		if abs(velocity.x) >= 1000 or Input.is_action_just_released("run"):
-			can_dash = false
-			can_jump = false
-		if is_on_wall_only():
-			can_dash = false
-		if is_on_floor() and !Input.is_action_pressed("run"):
-			can_dash = true
 
 		move_and_slide()
 
@@ -66,3 +51,10 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 
 func death():
 	can_move = false
+
+
+#if Input.is_action_just_pressed("run"):
+	#dashing = true
+
+if dashing == true:
+	
