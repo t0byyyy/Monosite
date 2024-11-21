@@ -6,55 +6,68 @@ func _on_control_start_game() -> void:
 	show()
 	can_move = true
 
-# jump logic - needs variable jump
+# jump logic
 const gravity = 400
 var jump_power = 600
 var x_accel = 100
 var can_jump
-var dashing
+
+#dash vars
+var dashing = false
+var last_direction
+var direction
+var can_dash
 
 func _physics_process(delta: float) -> void:
-	print(velocity.x, " ", velocity.y)
+
+#direction detection, prints speed/direction
+	direction = Input.get_axis("ui_left", "ui_right")
+	if not direction == 0 and dashing == false:
+		last_direction = direction
+	print(velocity.x, " ", velocity.y, " ", last_direction)
+
 # gravity
 	if can_move == true:
 		if not is_on_floor() and velocity.y <= 600:
 			velocity.y += gravity * delta
 
-# handles jump, resets to base on floor
+# handles jump, checks for dash
 		if is_on_floor() and !Input.is_action_pressed("ui_accept"):
 			can_jump = true
-		if velocity.y <= -135 or is_on_ceiling() or Input.is_action_just_released("ui_accept") or velocity.y >= 15:
+			can_dash = true
+		if velocity.y <= -135 or is_on_ceiling() or Input.is_action_just_released("ui_accept") or velocity.y >= 15 or dashing == true:
 			can_jump = false
 		if Input.is_action_pressed("ui_accept") and can_jump == true:
 			velocity.y += -(jump_power * delta)
 		if Input.is_action_just_pressed("ui_accept") and can_jump == true:
 			velocity.y += -95
-
-# handles directional inputs
-		var direction := Input.get_axis("ui_left", "ui_right")
-		if direction:
+		if direction and dashing == false:
 			velocity.x = direction * x_accel
 		else:
 			velocity.x = move_toward(velocity.x, 0, x_accel)
+
+#handles dash
+		if Input.is_action_just_pressed("run") and can_dash == true:
+			dashing = true
+			velocity.x = 300 * last_direction
+		if dashing == true:
+			velocity.y = 0
+			velocity.x += 150 * last_direction
+		if abs(velocity.x) >= 750 or is_on_wall():
+			dashing = false
+			can_dash = false
+			velocity.x = 150 * last_direction
 
 		move_and_slide()
 
 # emits xpos for enemy tracking
 	player_xpos.emit(position.x)
-
 signal player_xpos(x)
 
-var origin = Vector2(0, 0)
 #handles death, remember to add Area2Ds with 2,2 collisions to interact with this
+var origin = Vector2(0, 0)
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	self.position = origin
 
 func death():
 	can_move = false
-
-
-#if Input.is_action_just_pressed("run"):
-	#dashing = true
-
-if dashing == true:
-	
