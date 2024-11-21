@@ -24,7 +24,7 @@ func _physics_process(delta: float) -> void:
 	direction = Input.get_axis("ui_left", "ui_right")
 	if not direction == 0 and dashing == false:
 		last_direction = direction
-	print(velocity.x, " ", velocity.y, " ", last_direction)
+	print(velocity.x, " ", velocity.y, " ", last_direction, " ", can_dash, " ", dashing)
 
 # gravity
 	if can_move == true:
@@ -53,8 +53,9 @@ func _physics_process(delta: float) -> void:
 		if dashing == true:
 			velocity.y = 0
 			velocity.x += 150 * last_direction
-		if abs(velocity.x) >= 750 or is_on_wall():
+		if is_on_wall() or abs(velocity.x) >= 750:
 			dashing = false
+		if abs(velocity.x) >= 750:
 			can_dash = false
 			velocity.x = 150 * last_direction
 
