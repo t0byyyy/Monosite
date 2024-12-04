@@ -69,19 +69,9 @@ func _physics_process(delta: float) -> void:
 
 #emits signals for attacks
 		if Input.is_action_just_pressed("attack") and is_on_floor() and !Input.is_action_pressed("ui_up"):
-			if last_direction == -1:
-				slash_left.emit()
-				print("left")
-			if last_direction == 1:
-				slash_right.emit()
-				print("right")
+			slash_horizontal.emit(last_direction)
 		if Input.is_action_just_pressed("attack") and !Input.is_action_pressed("ui_up") and !Input.is_action_pressed("ui_down"):
-			if last_direction == -1:
-				slash_left.emit()
-				print("left")
-			if last_direction == 1:
-				slash_right.emit()
-				print("right")
+			slash_horizontal.emit(last_direction)
 		elif Input.is_action_just_pressed("attack") and Input.is_action_pressed("ui_up"):
 			slash_up.emit()
 			print("up")
@@ -107,7 +97,6 @@ func death():
 	can_move = false
 
 #signals for attack
-signal slash_left
-signal slash_right
+signal slash_horizontal(direction)
 signal slash_up
 signal slash_down

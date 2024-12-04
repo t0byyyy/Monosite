@@ -1,11 +1,10 @@
-[gd_scene load_steps=41 format=3 uid="uid://4er2c8roiypp"]
+[gd_scene load_steps=42 format=3 uid="uid://4er2c8roiypp"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_8f688"]
 [ext_resource type="Texture2D" uid="uid://boskhqgb7g6v0" path="res://assets/gradient.png" id="3_5n2ca"]
 [ext_resource type="Script" path="res://scripts/dash_cd.gd" id="3_de7vy"]
 [ext_resource type="Script" path="res://scripts/label.gd" id="4_ctuca"]
 [ext_resource type="Script" path="res://scenes/swing_timer.gd" id="5_cqlps"]
-[ext_resource type="Script" path="res://scripts/swing_left.gd" id="5_wot07"]
 [ext_resource type="Script" path="res://scripts/swing_right.gd" id="7_c6fde"]
 [ext_resource type="Script" path="res://scripts/swing_down.gd" id="9_k815b"]
 [ext_resource type="Texture2D" uid="uid://crh4vdq43x5sv" path="res://assets/animation/slash/slash0000.png" id="10_cltg5"]
@@ -31,7 +30,9 @@
 [ext_resource type="Texture2D" uid="uid://bg535k6c4uwq4" path="res://assets/animation/slash/slash0019.png" id="29_h1js8"]
 [ext_resource type="Texture2D" uid="uid://c7iln4d7ikoi6" path="res://assets/animation/slash/slash0020.png" id="30_hlh8m"]
 [ext_resource type="Texture2D" uid="uid://g6hpu8kooylo" path="res://assets/animation/slash/slash0021.png" id="31_5k7uq"]
+[ext_resource type="Script" path="res://scenes/slash_horizontal_anim.gd" id="32_dpu7q"]
 [ext_resource type="Texture2D" uid="uid://b6s2gmj808gp8" path="res://assets/animation/slash/slash0022.png" id="32_vh6fo"]
+[ext_resource type="Script" path="res://scenes/collision_polygon_2d.gd" id="33_ca7n3"]
 [ext_resource type="Texture2D" uid="uid://d1nh0x2gyvavy" path="res://assets/animation/slash/slash0023.png" id="33_nq21j"]
 [ext_resource type="Texture2D" uid="uid://c5efxo5m2ukmc" path="res://assets/animation/slash/slash0024.png" id="34_jgi8d"]
 
@@ -196,28 +197,27 @@ script = ExtResource("4_ctuca")
 wait_time = 0.2
 script = ExtResource("5_cqlps")
 
-[node name="SwingLeft" type="Area2D" parent="Sword"]
-collision_layer = 4
-collision_mask = 4
-monitoring = false
-monitorable = false
-script = ExtResource("5_wot07")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sword/SwingLeft"]
-position = Vector2(-9.5, 3.5)
-scale = Vector2(-1, 1)
-polygon = PackedVector2Array(1.5, -6, -6, -10, -10, 7.5, -12.5, 22, 2, 17.5, 5.5, 3.5)
-
-[node name="SwingRight" type="Area2D" parent="Sword"]
+[node name="SwingHorizontal" type="Area2D" parent="Sword"]
 collision_layer = 4
 collision_mask = 4
 monitoring = false
 monitorable = false
 script = ExtResource("7_c6fde")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sword/SwingRight"]
-position = Vector2(9.5, -3.5)
-polygon = PackedVector2Array(1.5, -6, -6, -10, -10, 7.5, -12.5, 22, 2, 17.5, 5.5, 3.5)
+[node name="SlashHorizontalAnim" type="AnimatedSprite2D" parent="Sword/SwingHorizontal"]
+position = Vector2(2.38419e-07, 0)
+scale = Vector2(0.8, 0.8)
+sprite_frames = SubResource("SpriteFrames_7jrox")
+animation = &"slash"
+frame = 14
+frame_progress = 0.506943
+offset = Vector2(6, 0)
+script = ExtResource("32_dpu7q")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sword/SwingHorizontal"]
+position = Vector2(5, 0)
+polygon = PackedVector2Array(8.5, -9, 2, -13, 1.5, 4, -5.5, 7.5, -5.5, 19, 9, 14, 12, 0.5)
+script = ExtResource("33_ca7n3")
 
 [node name="SwingDown" type="Area2D" parent="Sword"]
 collision_layer = 4
@@ -243,27 +243,18 @@ position = Vector2(-3.5, -9.5)
 rotation = 4.71239
 polygon = PackedVector2Array(1.5, -6, -6, -10, -6, 17, 1.5, 13, 6.5, 3.5)
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(2.5, 0)
-scale = Vector2(0.8, 0.8)
-sprite_frames = SubResource("SpriteFrames_7jrox")
-animation = &"slash"
-frame = 24
-frame_progress = 1.0
-
 [connection signal="slash_down" from="." to="Sword/SwingTimer" method="_on_player_slash_down"]
 [connection signal="slash_down" from="." to="Sword/SwingDown" method="_on_player_slash_down"]
-[connection signal="slash_left" from="." to="Sword/SwingTimer" method="_on_player_slash_left"]
-[connection signal="slash_left" from="." to="Sword/SwingLeft" method="_on_player_slash_left"]
-[connection signal="slash_right" from="." to="Sword/SwingTimer" method="_on_player_slash_right"]
-[connection signal="slash_right" from="." to="Sword/SwingRight" method="_on_player_slash_right"]
+[connection signal="slash_horizontal" from="." to="Sword/SwingTimer" method="_on_player_slash_horizontal"]
+[connection signal="slash_horizontal" from="." to="Sword/SwingHorizontal" method="_on_player_slash_horizontal"]
+[connection signal="slash_horizontal" from="." to="Sword/SwingHorizontal/CollisionPolygon2D" method="_on_player_slash_horizontal"]
+[connection signal="slash_horizontal" from="." to="Sword/SwingHorizontal/SlashHorizontalAnim" method="_on_player_slash_horizontal"]
 [connection signal="slash_up" from="." to="Sword/SwingTimer" method="_on_player_slash_up"]
 [connection signal="slash_up" from="." to="Sword/SwingUp" method="_on_player_slash_up"]
 [connection signal="start_dash_cd" from="." to="DashCD" method="_on_player_start_dash_cd"]
 [connection signal="timeout" from="DashCD" to="." method="_on_dash_cd_timeout"]
 [connection signal="area_entered" from="EnemyCollision" to="." method="_on_area_2d_area_entered"]
-[connection signal="slash_end" from="Sword/SwingTimer" to="Sword/SwingLeft" method="_on_slash_end"]
-[connection signal="slash_end" from="Sword/SwingTimer" to="Sword/SwingRight" method="_on_slash_end"]
+[connection signal="slash_end" from="Sword/SwingTimer" to="Sword/SwingHorizontal" method="_on_slash_end"]
 [connection signal="slash_end" from="Sword/SwingTimer" to="Sword/SwingDown" method="_on_slash_end"]
 [connection signal="slash_end" from="Sword/SwingTimer" to="Sword/SwingUp" method="_on_slash_end"]
 [connection signal="timeout" from="Sword/SwingTimer" to="Sword/SwingTimer" method="_on_timeout"]
