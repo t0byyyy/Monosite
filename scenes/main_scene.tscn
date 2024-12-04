@@ -1,10 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cgd1qf5k3aj7u"]
+[gd_scene load_steps=6 format=3 uid="uid://cgd1qf5k3aj7u"]
 
 [ext_resource type="PackedScene" uid="uid://cfjs5aun48o6y" path="res://scenes/main_menu.tscn" id="1_cw0vv"]
 [ext_resource type="PackedScene" uid="uid://4er2c8roiypp" path="res://scenes/player.tscn" id="2_d4ue6"]
 [ext_resource type="AudioStream" uid="uid://co3te8j7nb2uq" path="res://assets/base_area.mp3" id="3_sayrx"]
 [ext_resource type="Script" path="res://scripts/audio_stream_player_2.gd" id="4_4u1o7"]
-[ext_resource type="PackedScene" uid="uid://c40j7s2wily3y" path="res://scenes/slime_1.tscn" id="4_pikgb"]
 [ext_resource type="PackedScene" uid="uid://cks7iikcirhnm" path="res://scenes/level_debug.tscn" id="4_u1v3v"]
 
 [node name="Node2D" type="Node2D"]
@@ -22,11 +21,6 @@ script = ExtResource("4_4u1o7")
 
 [node name="level_debug" parent="." instance=ExtResource("4_u1v3v")]
 z_index = -1
-
-[node name="slime_1" parent="." instance=ExtResource("4_pikgb")]
-visible = false
-z_index = -1
-position = Vector2(-74, -6)
 
 [connection signal="start_game" from="Control" to="player" method="_on_control_start_game"]
 [connection signal="start_game" from="Control" to="player/AudioStreamPlayer2" method="_on_control_start_game"]
