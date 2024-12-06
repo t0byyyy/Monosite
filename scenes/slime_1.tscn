@@ -30,8 +30,8 @@ autostart = true
 script = ExtResource("3_kb16v")
 
 [node name="Area2D" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 2
+collision_layer = 6
+collision_mask = 6
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
 polygon = PackedVector2Array(19, 12, 19, 14, 17, 14, 17, 16, -17, 16, -17, 14, -19, 14, -19, 12, -21, 12, -21, 10, -23, 10, -23, -8, -21, -8, -21, -10, -19, -10, -19, -12, -15, -12, -15, -14, -13, -14, -13, -16, 13, -16, 13, -14, 15, -14, 15, -12, 19, -12, 19, -10, 21, -10, 21, -8, 23, -8, 23, 10, 21, 10, 21, 12)

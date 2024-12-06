@@ -68,16 +68,20 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 
 #emits signals for attacks
-		if Input.is_action_just_pressed("attack") and is_on_floor() and !Input.is_action_pressed("ui_up"):
+		if Input.is_action_just_pressed("attack") and is_on_floor() and !Input.is_action_pressed("ui_up") and can_slash == true and dashing == false:
 			slash_horizontal.emit(last_direction)
-		if Input.is_action_just_pressed("attack") and !Input.is_action_pressed("ui_up") and !Input.is_action_pressed("ui_down"):
+			can_slash = false
+		if Input.is_action_just_pressed("attack") and !Input.is_action_pressed("ui_up") and !Input.is_action_pressed("ui_down") and can_slash == true and dashing == false:
 			slash_horizontal.emit(last_direction)
-		elif Input.is_action_just_pressed("attack") and Input.is_action_pressed("ui_up"):
+			can_slash = false
+		elif Input.is_action_just_pressed("attack") and Input.is_action_pressed("ui_up") and can_slash == true and dashing == false:
 			slash_up.emit()
+			can_slash = false
 			print("up")
-		elif Input.is_action_just_pressed("attack") and Input.is_action_pressed("ui_down") and !is_on_floor():
+		elif Input.is_action_just_pressed("attack") and Input.is_action_pressed("ui_down") and !is_on_floor() and can_slash == true and dashing == false:
 			slash_down.emit()
-			print("down")
+			can_slash = false
+			print("up")
 
 # emits xpos for enemy tracking
 	player_xpos.emit(position.x)
@@ -100,3 +104,6 @@ func death():
 signal slash_horizontal(direction)
 signal slash_up
 signal slash_down
+var can_slash = true
+func _on_swing_timer_slash_end() -> void:
+	can_slash = true
