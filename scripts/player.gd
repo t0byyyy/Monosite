@@ -74,14 +74,14 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_pressed("attack") and !Input.is_action_pressed("ui_up") and !Input.is_action_pressed("ui_down") and can_slash == true and dashing == false:
 			slash_horizontal.emit(last_direction)
 			can_slash = false
-		elif Input.is_action_just_pressed("attack") and Input.is_action_pressed("ui_up") and can_slash == true and dashing == false:
-			slash_up.emit()
-			can_slash = false
-			print("up")
-		elif Input.is_action_just_pressed("attack") and Input.is_action_pressed("ui_down") and !is_on_floor() and can_slash == true and dashing == false:
-			slash_down.emit()
-			can_slash = false
-			print("up")
+		#elif Input.is_action_just_pressed("attack") and Input.is_action_pressed("ui_up") and can_slash == true and dashing == false:
+			#slash_up.emit()
+			#can_slash = false
+			#print("up")
+		#elif Input.is_action_just_pressed("attack") and Input.is_action_pressed("ui_down") and !is_on_floor() and can_slash == true and dashing == false:
+			#slash_down.emit()
+			#can_slash = false
+			#print("up")
 
 # emits xpos for enemy tracking
 	player_xpos.emit(position.x)
