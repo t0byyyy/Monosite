@@ -14,7 +14,7 @@ var can_jump
 
 #dash vars
 var dashing = false
-var last_direction
+var last_direction = 1
 var direction
 var can_dash
 var dash_on_cd = false
