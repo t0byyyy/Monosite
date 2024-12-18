@@ -65,6 +65,8 @@ func _physics_process(delta: float) -> void:
 			can_dash = false
 			velocity.x = 150 * last_direction
 
+#		if area touching wall and not on floor 
+
 		move_and_slide()
 
 #emits signals for attacks
