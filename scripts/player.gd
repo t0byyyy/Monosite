@@ -20,7 +20,7 @@ var can_dash
 var dash_on_cd = false
 
 func _physics_process(delta: float) -> void:
-
+	print(direction, " ", last_direction)
 #direction detection, prints speed/direction
 	direction = Input.get_axis("ui_left", "ui_right")
 	if not direction == 0 and dashing == false:
@@ -65,7 +65,9 @@ func _physics_process(delta: float) -> void:
 			can_dash = false
 			velocity.x = 150 * last_direction
 
-#		if area touching wall and not on floor 
+		if is_on_wall() and !is_on_floor():
+			if direction == -1:
+				abs(velocity.x)
 
 		move_and_slide()
 
